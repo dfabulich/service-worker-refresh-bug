@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<title>offline behavior test</title>
+<body>
+<p>HTML: <span id="html">1</span></p>
+<p>JS: <span id="js">Loading...</span></p>
+<script>
+// timeout to demonstrate race
+setTimeout(function() {
+	var script = document.createElement("script");
+	script.src = "script.js";
+	document.body.appendChild(script);
+}, 2000);
+</script>
+</body>
+</html>
