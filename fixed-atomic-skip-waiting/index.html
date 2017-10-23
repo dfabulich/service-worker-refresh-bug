@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<title>offline behavior test</title>
+<body>
+<p>HTML: <span id="html">1</span></p>
+<p>JS: <span id="js">Loading...</span></p>
+<script>
+// timeout to demonstrate race
+setTimeout(function() {
+	var script = document.createElement("script");
+	script.src = "script.js?v="+document.getElementById('html').innerHTML;
+	document.body.appendChild(script);
+}, 2000);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(function(registration) {
+    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+  }).catch(function(err) {
+    console.error('ServiceWorker registration failed: ', err);
+  });
+}
+</script>
+</body>
+</html>
